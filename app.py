@@ -10,13 +10,19 @@ import pandas as pd
 # Load environment variables from .env file (if it exists)
 load_dotenv()
 
+# User credentials
+USER_NAME = "USER_NAME"
+SENDER_EMAIL = "USER_EMAIL"
+PHONE_NO = "PHONE_NO"
+
+# data 
+RESUME_FILE = "Resume.pdf"
+EXCEL_FILE = "emails.xlsx"
+
 # -----------------------------
 # Configuration
 # -----------------------------
-SENDER_EMAIL = "USER_EMAIL"
 APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
-RESUME_FILE = "Resume.pdf"
-EXCEL_FILE = "emails.xlsx"
 
 # -----------------------------
 # Argument parser
@@ -34,7 +40,7 @@ def parse_args():
 # -----------------------------
 # Build email body
 # -----------------------------
-def build_body(company, role, recruiter_name):
+def build_body(company, role, recruiter_name, SENDER_EMAIL, PHONE_NO, USER_NAME):
     return f"""
 Dear {recruiter_name},
 
@@ -48,9 +54,9 @@ I look forward to the possibility of speaking with you.
 
 Best regards,
 
-[USER NAME]
-Phone: +91 [XXXXXXXXXX]
-Email: [USER_EMAIL]
+{USER_NAME}
+Phone: +91 {PHONE_NO}
+Email: {SENDER_EMAIL}
 """
 
 # -----------------------------
@@ -118,7 +124,7 @@ def main():
 
         for row in rows:
             subject = args.subject or f"Application for {row['Role']} at {row['Company']}"
-            body = build_body(row["Company"], row["Role"], row["Recruiter_Name"])
+            body = build_body(row["Company"], row["Role"], row["Recruiter_Name"], SENDER_EMAIL, PHONE_NO, USER_NAME)
             recipient = row["Email"]
 
             msg = EmailMessage()

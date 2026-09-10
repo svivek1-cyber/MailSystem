@@ -5,3 +5,4 @@ venv/
 env/
 *.egg-info/
 legacy_app.py
+myEmailBody.txt
