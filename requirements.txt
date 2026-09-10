@@ -1,0 +1,2 @@
+# No external packages required; uses Python standard library
+python>=3.8

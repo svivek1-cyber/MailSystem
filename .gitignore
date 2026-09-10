@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.env
+venv/
+env/
+*.egg-info/
+legacy_app.py
